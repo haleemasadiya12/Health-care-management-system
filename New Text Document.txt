@@ -1,0 +1,30 @@
+<html>
+<body >
+<?php
+$dbh=mysql_connect('localhost','root','') or die(mysql_error());
+mysql_select_db('healthcare') or die (mysql_error());
+
+$d_ssn=$_REQUEST['d_ssn'];
+$chk_num=$_REQUEST['chk_num'];
+$salary=$_REQUEST['salary'];
+$bonus=$_REQUEST['bonus'];
+$pay_date=$_REQUEST['pay_date'];
+
+
+
+$query="INSERT INTO doctor VALUES('$d_ssn','$chk_num','$salary','$bonus','$pay_date')";
+$result=mysql_query($query) or die(mysql_error());
+echo "data inserted successfully!!!!";
+
+$var=mysql_query("SELECT * from pay_check");
+echo"<table border size=1>";
+echo"<tr><th>d_ssn</th> <th>chk_num</th> <th>salary</th> <th>bonus</th> <th>pay_date</th></tr>";
+while ($arr=mysql_fetch_row($var))
+{
+	echo"<tr> <td>$arr[0]</td> <td>$arr[1]</td> <td>$arr[2]</td><td>$arr[3]</td> <td>$arr[4]</td> </tr>";
+}
+echo"</table>";
+
+?>
+</body>
+</html>
